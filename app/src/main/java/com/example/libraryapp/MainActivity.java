@@ -2,116 +2,166 @@ package com.example.libraryapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.animation.AnimationUtils;
+import android.widget.EditText;
+import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import com.google.android.material.appbar.MaterialToolbar;
+
 public class MainActivity extends AppCompatActivity {
 
-    // ================= CardViews =================
-
-    CardView javaCard,
-            dbCard,
-            sadCard,
-            cppCard,
-            networkCard,
-            ipCard;
+    CardView javaCard, dbCard, sadCard, cppCard, networkCard, ipCard;
+    EditText searchBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // ================= Initialize Views =================
+        // ================= Toolbar =================
+        MaterialToolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
+        // 🎬 Animation
+        toolbar.startAnimation(
+                AnimationUtils.loadAnimation(
+                        this,
+                        android.R.anim.slide_in_left
+                )
+        );
+
+        // ================= Cards =================
         javaCard = findViewById(R.id.javaCard);
-
         dbCard = findViewById(R.id.dbCard);
-
         sadCard = findViewById(R.id.sadCard);
-
         cppCard = findViewById(R.id.cppCard);
-
         networkCard = findViewById(R.id.networkCard);
-
         ipCard = findViewById(R.id.ipCard);
 
-        // ================= Java Card =================
+        // ================= Search Bar =================
+        searchBar = findViewById(R.id.searchBar);
 
-        javaCard.setOnClickListener(v -> {
+        searchBar.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 
-            Intent intent =
-                    new Intent(MainActivity.this,
-                            BookListActivity.class);
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                filterCards(s.toString());
+            }
 
-            intent.putExtra("category", "java");
-
-            startActivity(intent);
+            @Override
+            public void afterTextChanged(Editable s) {}
         });
 
-        // ================= Database Card =================
+        // ================= Click Events =================
+        javaCard.setOnClickListener(v -> open("java"));
+        dbCard.setOnClickListener(v -> open("database"));
+        sadCard.setOnClickListener(v -> open("sad"));
+        cppCard.setOnClickListener(v -> open("cpp"));
+        networkCard.setOnClickListener(v -> open("network"));
+        ipCard.setOnClickListener(v -> open("ip"));
+    }
 
-        dbCard.setOnClickListener(v -> {
+    // ================= OPEN ACTIVITY =================
+    private void open(String category) {
+        Intent intent = new Intent(MainActivity.this, BookListActivity.class);
+        intent.putExtra("category", category);
+        startActivity(intent);
+    }
 
-            Intent intent =
-                    new Intent(MainActivity.this,
-                            BookListActivity.class);
+    // ================= REAL SEARCH FILTER =================
+    private void filterCards(String text) {
 
-            intent.putExtra("category", "database");
+        String query = text.toLowerCase().trim();
 
-            startActivity(intent);
-        });
+        javaCard.setVisibility(
+                "java".contains(query) ? CardView.VISIBLE : CardView.GONE
+        );
 
-        // ================= SAD Card =================
+        dbCard.setVisibility(
+                "database".contains(query) ? CardView.VISIBLE : CardView.GONE
+        );
 
-        sadCard.setOnClickListener(v -> {
+        sadCard.setVisibility(
+                "sad".contains(query) ? CardView.VISIBLE : CardView.GONE
+        );
 
-            Intent intent =
-                    new Intent(MainActivity.this,
-                            BookListActivity.class);
+        cppCard.setVisibility(
+                "cpp".contains(query) || "c++".contains(query) ? CardView.VISIBLE : CardView.GONE
+        );
 
-            intent.putExtra("category", "sad");
+        networkCard.setVisibility(
+                "network".contains(query) ? CardView.VISIBLE : CardView.GONE
+        );
 
-            startActivity(intent);
-        });
+        ipCard.setVisibility(
+                "ip".contains(query) ? CardView.VISIBLE : CardView.GONE
+        );
+    }
 
-        // ================= C++ Card =================
+    // ================= MENU =================
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        menu.add(0, 1, 0, "About");
+        menu.add(0, 2, 1, "Share");
+        menu.add(0, 3, 2, "Exit");
+        return true;
+    }
 
-        cppCard.setOnClickListener(v -> {
+    // ================= MENU ACTIONS =================
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
 
-            Intent intent =
-                    new Intent(MainActivity.this,
-                            BookListActivity.class);
+        if (item.getItemId() == 1) {
 
-            intent.putExtra("category", "cpp");
+            new AlertDialog.Builder(this)
+                    .setTitle("About App")
+                    .setMessage("PDF Application\n\n" +
+                            "Version : 1.0\n\n" +
+                                    "This application helps students " +
+                                    "to read PDF books and lecture notes.\n\n" +
+                                    "Features:\n" +
+                                    "• PDF Viewer\n" +
+                                    "• Search Chapters\n" +
+                                    "• Multiple Courses\n" +
+                                    "• Easy Navigation\n\n" +
+                                    "Developed By: " +
+                                    "Muluken.A\n" + "Email: muluken851@gmail.com")
+                    .setPositiveButton("OK", null)
+                    .show();
 
-            startActivity(intent);
-        });
+            return true;
+        }
 
-        // ================= Networking Card =================
+        else if (item.getItemId() == 2) {
 
-        networkCard.setOnClickListener(v -> {
+            Intent shareIntent = new Intent(Intent.ACTION_SEND);
+            shareIntent.setType("text/plain");
 
-            Intent intent =
-                    new Intent(MainActivity.this,
-                            BookListActivity.class);
+            shareIntent.putExtra(Intent.EXTRA_TEXT,
+                    "Download our PdApp from Play store");
 
-            intent.putExtra("category", "network");
+            startActivity(Intent.createChooser(shareIntent, "Share via"));
 
-            startActivity(intent);
-        });
+            return true;
+        }
 
-        // ================= IP Card =================
+        else if (item.getItemId() == 3) {
 
-        ipCard.setOnClickListener(v -> {
+            finish();
+            Toast.makeText(this, "App Closed", Toast.LENGTH_SHORT).show();
+            return true;
+        }
 
-            Intent intent =
-                    new Intent(MainActivity.this,
-                            BookListActivity.class);
-
-            intent.putExtra("category", "ip");
-
-            startActivity(intent);
-        });
+        return super.onOptionsItemSelected(item);
     }
 }

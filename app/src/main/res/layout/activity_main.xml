@@ -1,4 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#F5F5F5">
+
+    <!-- ================= FIXED TOOLBAR ================= -->
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#0066ff"
+        app:title="HI Courses"
+        app:titleCentered="true"
+        app:titleTextColor="@android:color/white"
+        app:menu="@menu/main_menu"/>
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -11,18 +28,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <!-- ================= Toolbar ================= -->
-
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="0dp"
-            android:background="#0000ff"
-            app:title="HI Courses"
-            app:titleCentered="true"
-            app:titleTextColor="@android:color/white" />
-
         <!-- ================= Header Image ================= -->
 
         <FrameLayout
@@ -34,9 +39,7 @@
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
                 android:src="@drawable/univers" />
-
             <!-- Dark Overlay -->
-
             <View
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -61,7 +64,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Digital Library System"
+                    android:text="Learn. Read. Grow"
                     android:textColor="#FFFFFF"
                     android:textSize="16sp" />
 
@@ -81,6 +84,16 @@
             android:textSize="24sp"
             android:textStyle="bold" />
 
+
+        <EditText
+            android:id="@+id/searchBar"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_margin="16dp"
+            android:hint="Search books..."
+            android:padding="10dp"
+            android:background="@android:drawable/edit_text"/>
+
         <!-- ================= Grid Layout ================= -->
 
         <GridLayout
@@ -98,6 +111,7 @@
                 android:layout_width="0dp"
                 android:layout_height="150dp"
                 android:layout_columnWeight="1"
+                app:cardBackgroundColor="#9966ff"
                 app:cardCornerRadius="10dp"
                 app:cardElevation="8dp">
 
@@ -133,6 +147,7 @@
                 android:layout_width="0dp"
                 android:layout_height="150dp"
                 android:layout_columnWeight="1"
+                app:cardBackgroundColor="#009933"
                 app:cardCornerRadius="10dp"
                 app:cardElevation="8dp">
 
@@ -168,6 +183,7 @@
                 android:layout_width="0dp"
                 android:layout_height="150dp"
                 android:layout_columnWeight="1"
+                app:cardBackgroundColor="#3333ff"
                 app:cardCornerRadius="10dp"
                 app:cardElevation="8dp">
 
@@ -188,7 +204,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
                         android:text="SAD"
-                        android:textColor="#000"
+                        android:textColor="#FFFFFF"
                         android:textSize="22sp"
                         android:textStyle="bold" />
 
@@ -203,6 +219,7 @@
                 android:layout_width="0dp"
                 android:layout_height="150dp"
                 android:layout_columnWeight="1"
+                app:cardBackgroundColor="#cc66ff"
                 app:cardCornerRadius="10dp"
                 app:cardElevation="8dp">
 
@@ -238,6 +255,7 @@
                 android:layout_width="0dp"
                 android:layout_height="150dp"
                 android:layout_columnWeight="1"
+                app:cardBackgroundColor="#66b3ff"
                 app:cardCornerRadius="10dp"
                 app:cardElevation="8dp">
 
@@ -273,6 +291,7 @@
                 android:layout_width="0dp"
                 android:layout_height="148dp"
                 android:layout_columnWeight="1"
+                app:cardBackgroundColor="#520066"
                 app:cardCornerRadius="10dp"
                 app:cardElevation="8dp">
 
@@ -293,7 +312,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
                         android:text="IP"
-                        android:textColor="#000"
+                        android:textColor="#FFFFFF"
                         android:textSize="22sp"
                         android:textStyle="bold" />
 
@@ -306,3 +325,4 @@
     </LinearLayout>
 
 </ScrollView>
+</LinearLayout>

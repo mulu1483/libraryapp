@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -20,25 +19,28 @@ public class BookListActivity extends AppCompatActivity {
     ArrayAdapter<String> adapter;
 
     String[] books;
+    String[] pdfFiles;
 
     String category;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_book_list);
 
         // ================= Initialize =================
 
         listView = findViewById(R.id.listView);
-        searchView = findViewById(R.id.searchView);
-        toolbar = findViewById(R.id.toolbar);
 
-        toolbar.setOverflowIcon(getDrawable(R.drawable.ic_menu));
+        searchView = findViewById(R.id.searchView);
+
+        toolbar = findViewById(R.id.toolbar);
 
         category = getIntent().getStringExtra("category");
 
-        // ================= Toolbar Title =================
+        // ================= JAVA =================
 
         if (category.equals("java")) {
 
@@ -54,97 +56,186 @@ public class BookListActivity extends AppCompatActivity {
                     "☕ Chapter 6 : Object Orientation",
                     "☕ Chapter 7 : Exception Handling",
                     "☕ OOP_Notes_Final"
-
             };
 
-        } else if (category.equals("database")) {
+            pdfFiles = new String[]{
 
-            toolbar.setTitle("Database Chapters");
+                    "Java chapter 1.pdf",
+                    "Java chapter 2 section 1.pdf",
+                    "Java chapter 2 section 2.pdf",
+                    "Java chapter 2 section 3.pdf",
+                    "Java chapter 2 section 4.pdf",
+                    "Java chapter 3.pdf",
+                    "Java chapter 4.pdf",
+                    "OOP-NOTES-final.pdf"
+            };
+        }
+
+        // ================= DATABASE =================
+
+        else if (category.equals("database")) {
+
+            toolbar.setTitle("Database");
 
             books = new String[]{
-                    "\uD83D\uDEE2\uFE0F Fundamental of Database",
-                    "\uD83D\uDEE2\uFE0F ADB Chapter 1 : Data File & Configure\n" + "                                   " +
+
+                    "🛢️ Fundamental of Database",
+                    "🛢️ ADB Chapter 1 : Data File & Configure\n" + "                                   " +
                             "SQL",
-                    "\uD83D\uDEE2\uFE0F ADB Chapter 2 : Transaction",
-                    "\uD83D\uDEE2\uFE0F ADB Chapter 3 : Concurrency Control\n       " + "                           " +
+                    "🛢️ ADB Chapter 2 : Transaction",
+                    "🛢️ ADB Chapter 3 : Concurrency Control\n       " + "                           " +
                             "Techniques",
-                    "\uD83D\uDEE2\uFE0F ADB Chapter 4 : Database Security & \n       " + "                           " +
+                    "🛢️ ADB Chapter 4 : Database Security & \n       " + "                           " +
                             "Authorization",
-                    "\uD83D\uDEE2\uFE0F ADB Chapter 5 : Designing SQL Server\n       " + "                           " +
+                    "🛢️ ADB Chapter 5 : Designing SQL Server\n       " + "                           " +
                             "Indexes",
-                    "\uD83D\uDEE2\uFE0F ADB Chapter 6 : Backup & Restore\n"+"                                  " +
+                    "🛢️ ADB Chapter 6 : Backup & Restore\n"+"                                  " +
                             "Database"
             };
 
-        } else if (category.equals("sad")) {
+            pdfFiles = new String[]{
+
+                    "FDB System Lecture Note All in One.pdf",
+                    "ADB-Chapter 1-- Data File and Configure SQL.pdf",
+                    "ADB-Chapter 2-- Transaction  Processing Concepts.pdf",
+                    "ADB-Chapter 3-- Concurrency Control Techniques.pdf",
+                    "ADB-Chapter 4-- Database Security and Authorization.pdf",
+                    "ADB-Chapter 5-- Designing SQL Server Indexes.pdf",
+                    "ADB-Chapter 6-- Backup and Restore Database.pdf"
+            };
+        }
+
+        // ================= SAD =================
+
+        else if (category.equals("sad")) {
 
             toolbar.setTitle("System Analysis & Design");
 
             books = new String[]{
 
-                    "\uD83D\uDCCA SAD Book",
-                    "\uD83D\uDCCA SAD Chapter 1",
-                    "\uD83D\uDCCA SAD Chapter 2",
-                    "\uD83D\uDCCA SAD Chapter 3",
-                    "\uD83D\uDCCA SAD Chapter 4",
-                    "\uD83D\uDCCA SAD Chapter 5",
-                    "\uD83D\uDCCA SAD Chapter 6",
-                    "\uD83D\uDCCA SAD Chapter 7",
-                    "\uD83D\uDCCA SAD Chapter 8",
-                    "\uD83D\uDCCA SAD Chapter 9",
-                    "\uD83D\uDCCA SAD Chapter 10"
+                    "📊 SAD Book",
+                    "📊 SAD Chapter 1",
+                    "📊 SAD Chapter 2",
+                    "📊 SAD Chapter 3",
+                    "📊 SAD Chapter 4",
+                    "📊 SAD Chapter 5",
+                    "📊 SAD Chapter 6",
+                    "📊 SAD Chapter 7",
+                    "📊 SAD Chapter 8",
+                    "📊 SAD Chapter 9",
+                    "📊 SAD Chapter 10"
             };
-        } else if (category.equals("cpp")) {
+
+            pdfFiles = new String[]{
+
+                    "sad.pdf",
+                    "SAD-1.pdf",
+                    "SAD-2.pdf",
+                    "SAD-3.pdf",
+                    "SAD-4.pdf",
+                    "SAD-5.pdf",
+                    "SAD-6.pdf",
+                    "SAD-7.pdf",
+                    "SAD-8.pdf",
+                    "SAD-9.pdf",
+                    "SAD-10.pdf"
+            };
+        }
+
+        // ================= C++ =================
+
+        else if (category.equals("cpp")) {
 
             toolbar.setTitle("Fundamental of Programing");
 
             books = new String[]{
-                    "\uD83E\uDDED C++ Lecture All in one",
-                    "\uD83E\uDDED Fundamental of Programing 1",
-                    "\uD83E\uDDED Fundamental of Programing 2",
-                    "\uD83E\uDDED C++ Structure and File Management",
-                    "\uD83E\uDDED C++ Complete reference",
-                    "\uD83E\uDDED C++ Function",
-                    "\uD83E\uDDED C++ Array",
-                    "\uD83E\uDDED C++ Pointer"
 
-
+                    "🧭 C++ Lecture All in One",
+                    "🧭 Fundamental of Programing 1",
+                    "🧭 Fundamental of Programing 2",
+                    "🧭 C++ Structure and File Management",
+                    "🧭 C++ Complete Reference",
+                    "🧭 C++ Function",
+                    "🧭 C++ Array",
+                    "🧭 C++ Pointer"
             };
-        } else if (category.equals("network")) {
+
+            pdfFiles = new String[]{
+
+                    "C++ Lecture All in One.pdf",
+                    "c++ fandamental of programimg 1.pdf",
+                    "c++ fandamental of programing 2.pdf",
+                    "c++ structure and file managment.pdf",
+                    "C++ complete reference.pdf",
+                    "C++ function.pdf",
+                    "c++ array.pdf",
+                    "c++ pointer.pdf"
+            };
+        }
+
+        // ================= NETWORK =================
+
+        else if (category.equals("network")) {
 
             toolbar.setTitle("Networking");
 
             books = new String[]{
 
-                    "\uD83C\uDF10 Chapter 1: Data Communication Basic",
-                    "\uD83C\uDF10 Chapter 2: Introduction to Computer\n" +"                         " +
+                    "🌐 Chapter 1: Data Communication Basic",
+                    "🌐 Chapter 2: Introduction to Computer\n" +"                         " +
                             "Network",
-                    "\uD83C\uDF10 Chapter 3: Data Communication &\n" + "                         " +
+                    "🌐 Chapter 3: Data Communication &\n" + "                         " +
                             "Computer Networking",
-                    "\uD83C\uDF10 Chapter 4: Network Protocols",
-                    "\uD83C\uDF10 Chapter 5: OSI Reference Model",
-                    "\uD83C\uDF10 Chapter 6: Introduction to IP Addressing\n" + "                         " +
+                    "🌐 Chapter 4: Network Protocols",
+                    "🌐 Chapter 5: OSI Reference Model",
+                    "🌐 Chapter 6: Introduction to IP Addressing\n" + "                         " +
                             "& Subnetting",
-                    "\uD83C\uDF10 Chapter 6: Practice Questions",
-                    "\uD83C\uDF10 Chapter 7: Data Security & Integrity",
-                    "\uD83C\uDF10 Networking Book"
-
+                    "🌐 Chapter 6: Practice Questions",
+                    "🌐 Chapter 7: Data Security & Integrity",
+                    "🌐 Networking Book"
             };
-        } else {
+
+            pdfFiles = new String[]{
+
+                    "lecturenote 1.pdf",
+                    "lecturenote 2 IT.pdf",
+                    "lecturenote 3 IT.pdf",
+                    "lecturenote 4.pdf",
+                    "lecturenote 5.pdf",
+                    "lecturenote 6a pdf.pdf",
+                    "lecturenote 6b.pdf",
+                    "lecturenote 7.pdf",
+                    "network.pdf"
+            };
+        }
+
+        // ================= IP =================
+
+        else {
 
             toolbar.setTitle("Internet Programing 1");
 
             books = new String[]{
 
-                    "\uD83D\uDCE1 IP Chapter 1",
-                    "\uD83D\uDCE1 IP Chapter 2",
-                    "\uD83D\uDCE1 IP Chapter 3",
-                    "\uD83D\uDCE1 IP Chapter 4 HTML",
-                    "\uD83D\uDCE1 IP Chapter 4 HTML Lab",
-                    "\uD83D\uDCE1 IP Chapter 5 CSS",
-                    "\uD83D\uDCE1 IP Chapter 6 Javascript"
+                    "📡 IP Chapter 1",
+                    "📡 IP Chapter 2",
+                    "📡 IP Chapter 3",
+                    "📡 IP Chapter 4 HTML",
+                    "📡 IP Chapter 4 HTML Lab",
+                    "📡 IP Chapter 5 CSS",
+                    "📡 IP Chapter 6 Javascript"
             };
 
+            pdfFiles = new String[]{
+
+                    "IP Chapter 1.pdf",
+                    "IP Chapter 2.pdf",
+                    "IP Chapter 3.pdf",
+                    "IP Chapter 4.pdf",
+                    "IP Chapter 4-Lab.pdf",
+                    "IP Chapter 5.pdf",
+                    "IP Chapter 6.pdf"
+            };
         }
 
         // ================= Adapter =================
@@ -157,13 +248,16 @@ public class BookListActivity extends AppCompatActivity {
 
         listView.setAdapter(adapter);
 
-        // ================= Search =================
+        // ================= SEARCH FILTER =================
 
         searchView.setOnQueryTextListener(
                 new SearchView.OnQueryTextListener() {
 
                     @Override
                     public boolean onQueryTextSubmit(String query) {
+
+                        adapter.getFilter().filter(query);
+
                         return false;
                     }
 
@@ -172,23 +266,49 @@ public class BookListActivity extends AppCompatActivity {
 
                         adapter.getFilter().filter(newText);
 
-                        return true;
+                        return false;
                     }
                 });
 
-        // ================= Back Arrow =================
+        // ================= OPEN PDF =================
 
-        toolbar.setNavigationOnClickListener(v -> {
+        listView.setOnItemClickListener((parent, view, position, id) -> {
 
-            finish();
+            String selectedBook =
+                    adapter.getItem(position);
 
+            Intent intent =
+                    new Intent(
+                            BookListActivity.this,
+                            PDFActivity.class
+                    );
+
+            // Find correct PDF after filtering
+
+            for (int i = 0; i < books.length; i++) {
+
+                if (books[i].equals(selectedBook)) {
+
+                    intent.putExtra(
+                            "file",
+                            pdfFiles[i]
+                    );
+
+                    break;
+                }
+            }
+
+            startActivity(intent);
         });
 
-        // ================= Menu Click =================
+        // ================= BACK BUTTON =================
+
+        toolbar.setNavigationOnClickListener(v -> finish());
+        // ================= MENU CLICK =================
 
         toolbar.setOnMenuItemClickListener(item -> {
 
-            // ================= ABOUT =================
+            // ===== ABOUT =====
 
             if (item.getItemId() == R.id.about) {
 
@@ -197,8 +317,7 @@ public class BookListActivity extends AppCompatActivity {
 
                 builder.setTitle("About App");
 
-                builder.setMessage(
-                        "PDF Application\n\n" +
+                builder.setMessage("PDF Application\n\n" +
                                 "Version : 1.0\n\n" +
                                 "This application helps students " +
                                 "to read PDF books and lecture notes.\n\n" +
@@ -208,34 +327,40 @@ public class BookListActivity extends AppCompatActivity {
                                 "• Multiple Courses\n" +
                                 "• Easy Navigation\n\n" +
                                 "Developed By: " +
-                                "Muluken.A"
+                                "Muluken.A\n" + "Email: muluken851@gmail.com"
                 );
 
-                builder.setIcon(R.drawable.ic_launcher_foreground);
-
-                builder.setPositiveButton("OK",
-                        (dialog, which) -> dialog.dismiss());
+                builder.setPositiveButton(
+                        "OK",
+                        (dialog, which) -> dialog.dismiss()
+                );
 
                 builder.show();
             }
 
-            // ================= SHARE =================
+            // ===== SHARE =====
 
             else if (item.getItemId() == R.id.share) {
 
-                Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                Intent shareIntent =
+                        new Intent(Intent.ACTION_SEND);
 
                 shareIntent.setType("text/plain");
 
-                shareIntent.putExtra(Intent.EXTRA_TEXT,
-                        "Download our Library App");
+                shareIntent.putExtra(
+                        Intent.EXTRA_TEXT,
+                        "\"Download our PdApp from Play store\""
+                );
 
-                startActivity(Intent.createChooser(
-                        shareIntent,
-                        "Share"));
+                startActivity(
+                        Intent.createChooser(
+                                shareIntent,
+                                "Share Using"
+                        )
+                );
             }
 
-            // ================= EXIT =================
+            // ===== EXIT =====
 
             else if (item.getItemId() == R.id.exit) {
 
@@ -243,293 +368,6 @@ public class BookListActivity extends AppCompatActivity {
             }
 
             return true;
-        });
-
-        // ================= Open PDF =================
-
-        listView.setOnItemClickListener((parent, view, position, id) -> {
-
-            Intent intent =
-                    new Intent(BookListActivity.this,
-                            PDFActivity.class);
-
-            // Java PDFs
-
-            if (category.equals("java")) {
-
-                switch (position) {
-
-                    case 0:
-                        intent.putExtra("file",
-                                "Java chapter 1.pdf");
-                        break;
-
-                    case 1:
-                        intent.putExtra("file",
-                                "Java chapter 2 section 1.pdf");
-                        break;
-
-                    case 2:
-                        intent.putExtra("file",
-                                "Java chapter 2 section 2.pdf");
-                        break;
-
-                    case 3:
-                        intent.putExtra("file",
-                                "Java chapter 2 section 3.pdf");
-                        break;
-                    case 4:
-                        intent.putExtra("file",
-                                "Java chapter 2 section 4.pdf");
-                        break;
-                    case 5:
-                        intent.putExtra("file",
-                                "Java chapter 3.pdf");
-                        break;
-                    case 6:
-                        intent.putExtra("file",
-                                "Java chapter 4.pdf");
-                        break;
-                    case 7:
-                        intent.putExtra("file",
-                                "OOP-NOTES-final.pdf");
-                        break;
-                }
-            }
-
-            //Data Base pdf
-            else if (category.equals("database")) {
-
-                switch (position) {
-
-                    case 0:
-                        intent.putExtra("file",
-                                "FDB System Lecture Note All in One.pdf");
-                        break;
-
-                    case 1:
-                        intent.putExtra("file",
-                                "ADB-Chapter 1-- Data File and Configure SQL.pdf");
-                        break;
-
-                    case 2:
-                        intent.putExtra("file",
-                                "ADB-Chapter 2-- Transaction  Processing Concepts.pdf");
-                        break;
-
-                    case 3:
-                        intent.putExtra("file",
-                                "ADB-Chapter 3-- Concurrency Control Techniques.pdf");
-                        break;
-                    case 4:
-                        intent.putExtra("file",
-                                "ADB-Chapter 4-- Database Security and Authorization.pdf");
-                        break;
-                    case 5:
-                        intent.putExtra("file",
-                                "ADB-Chapter 5-- Designing SQL Server Indexes.pdf");
-                        break;
-                    case 6:
-                        intent.putExtra("file",
-                                "ADB-Chapter 6-- Backup and Restore Database.pdf");
-                        break;
-                    case 7:
-                        intent.putExtra("file",
-                                "db_book.pdf");
-                        break;
-
-                }
-            }
-
-            //system analysis & planing pdf
-            else if (category.equals("sad")) {
-
-                switch (position) {
-
-                    case 0:
-                        intent.putExtra("file",
-                                "sad.pdf");
-                        break;
-                    case 1:
-                        intent.putExtra("file",
-                                "SAD-1.pdf");
-                        break;
-
-                    case 2:
-                        intent.putExtra("file",
-                                "SAD-2.pdf");
-                        break;
-
-                    case 3:
-                        intent.putExtra("file",
-                                "SAD-3.pdf");
-                        break;
-
-                    case 4:
-                        intent.putExtra("file",
-                                "SAD-4.pdf");
-                        break;
-
-                    case 5:
-                        intent.putExtra("file",
-                                "SAD-5.pdf");
-                        break;
-
-                    case 6:
-                        intent.putExtra("file",
-                                "SAD-6.pdf");
-                        break;
-
-                    case 7:
-                        intent.putExtra("file",
-                                "SAD-7.pdf");
-                        break;
-
-                    case 8:
-                        intent.putExtra("file",
-                                "SAD-8.pdf");
-                        break;
-
-                    case 9:
-                        intent.putExtra("file",
-                                "SAD-9.pdf");
-                        break;
-
-                    case 10:
-                        intent.putExtra("file",
-                                "SAD-10.pdf");
-                        break;
-
-                }
-            }
-
-            //C++ pdf
-            else if (category.equals("cpp")) {
-
-                switch (position) {
-
-                    case 0:
-                        intent.putExtra("file",
-                                "C++ Lecture All in One.pdf");
-                        break;
-
-                    case 1:
-                        intent.putExtra("file",
-                                "c++ fandamental of programimg 1.pdf");
-                        break;
-                    case 2:
-                        intent.putExtra("file",
-                                "c++ fandamental of programing 2.pdf");
-                        break;
-                    case 3:
-                        intent.putExtra("file",
-                                "c++ structure and file managment.pdf");
-                        break;
-                    case 4:
-                        intent.putExtra("file",
-                                "C++ function.pdf");
-                        break;
-                    case 5:
-                        intent.putExtra("file",
-                                "c++ array.pdf");
-                        break;
-                    case 6:
-                        intent.putExtra("file",
-                                "c++ pointer.pdf");
-                        break;
-                    case 7:
-                        intent.putExtra("file",
-                                "C++ complete reference.pdf");
-                        break;
-                }
-            }
-
-            //Networking pdf
-            else if (category.equals("network")) {
-
-                switch (position) {
-
-                    case 0:
-                        intent.putExtra("file",
-                                "lecturenote 1.pdf");
-                        break;
-
-                    case 1:
-                        intent.putExtra("file",
-                                "lecturenote 2 IT.pdf");
-                        break;
-
-                    case 2:
-                        intent.putExtra("file",
-                                "lecturenote 3 IT.pdf");
-                        break;
-
-                    case 3:
-                        intent.putExtra("file",
-                                "lecturenote 4.pdf");
-                        break;
-                    case 4:
-                        intent.putExtra("file",
-                                "lecturenote 5.pdf");
-                        break;
-                    case 5:
-                        intent.putExtra("file",
-                                "lecturenote 6a pdf.pdf");
-                        break;
-                    case 6:
-                        intent.putExtra("file",
-                                "lecturenote 6b.pdf");
-                        break;
-                    case 7:
-                        intent.putExtra("file",
-                                "lecturenote 7.pdf");
-                        break;
-                    case 8:
-                        intent.putExtra("file",
-                                "network.pdf");
-                        break;
-                }
-            }
-            //Internet Programing pdf
-            else{
-
-                switch (position) {
-
-                    case 0:
-                        intent.putExtra("file",
-                                "IP Chapter 1.pdf");
-                        break;
-
-                    case 1:
-                        intent.putExtra("file",
-                                "IP Chapter 2.pdf");
-                        break;
-
-                    case 2:
-                        intent.putExtra("file",
-                                "IP Chapter 3.pdf");
-                        break;
-
-                    case 3:
-                        intent.putExtra("file",
-                                "IP Chapter 4.pdf");
-                        break;
-                    case 4:
-                        intent.putExtra("file",
-                                "IP Chapter 4-Lab.pdf");
-                        break;
-                    case 5:
-                        intent.putExtra("file",
-                                "IP Chapter 5.pdf");
-                        break;
-                    case 6:
-                        intent.putExtra("file",
-                                "IP Chapter 6.pdf");
-                        break;
-                }
-            }
-
-            startActivity(intent);
         });
     }
 }
