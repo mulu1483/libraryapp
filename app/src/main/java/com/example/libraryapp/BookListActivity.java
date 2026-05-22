@@ -30,13 +30,34 @@ public class BookListActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_book_list);
 
+        // ================= Toolbar =================
+        MaterialToolbar toolbar =
+                findViewById(R.id.toolbar);
+
+        setSupportActionBar(toolbar);
+
+        // Make menu icon white
+
+        toolbar.post(() -> {
+
+            if (toolbar.getOverflowIcon() != null) {
+
+                toolbar.getOverflowIcon().setTint(
+
+                        getResources().getColor(
+                                android.R.color.white
+                        )
+
+                );
+
+            }
+
+        });
         // ================= Initialize =================
 
         listView = findViewById(R.id.listView);
 
         searchView = findViewById(R.id.searchView);
-
-        toolbar = findViewById(R.id.toolbar);
 
         category = getIntent().getStringExtra("category");
 
@@ -211,7 +232,7 @@ public class BookListActivity extends AppCompatActivity {
 
         // ================= IP =================
 
-        else {
+        else if (category.equals("ip")) {
 
             toolbar.setTitle("Internet Programing 1");
 
@@ -235,6 +256,60 @@ public class BookListActivity extends AppCompatActivity {
                     "IP Chapter 4-Lab.pdf",
                     "IP Chapter 5.pdf",
                     "IP Chapter 6.pdf"
+            };
+        }
+        else if (category.equals("M-Computing")) {
+
+            toolbar.setTitle("Mobile Computing");
+
+            books = new String[]{
+
+                    "\uD83D\uDCF3 Chapter 1-4: Mobile Computing",
+                    "\uD83D\uDCF3 Chapter 5-10: Android Programing"
+            };
+
+            pdfFiles = new String[]{
+
+                    "MC 1-4.pdf",
+                    "MC 5-10.pdf"
+            };
+        }
+        else if (category.equals("E-Health")) {
+
+            toolbar.setTitle("E-Health");
+
+            books = new String[]{
+
+                    "\uD83C\uDFE5 Chapter 1-5: E-Health"
+            };
+
+            pdfFiles = new String[]{
+
+                    "E-Health 1-5.pdf"
+            };
+        }
+        else if (category.equals("C-Maintenance")) {
+            toolbar.setTitle("Computer Maintenance");
+            books = new String[]{
+
+                    "\uD83D\uDEE0\uFE0F Computer Maintenance Full"
+            };
+
+            pdfFiles = new String[]{
+
+                    "CM module full Last.pdf"
+            };
+        }
+        else{
+            toolbar.setTitle("Fundamental of HI");
+            books = new String[]{
+
+                    "\uD83D\uDCCA Fundamental of HI"
+            };
+
+            pdfFiles = new String[]{
+
+                    "All chapters HI.pdf"
             };
         }
 

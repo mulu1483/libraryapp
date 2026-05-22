@@ -18,7 +18,7 @@ import com.google.android.material.appbar.MaterialToolbar;
 
 public class MainActivity extends AppCompatActivity {
 
-    CardView javaCard, dbCard, sadCard, cppCard, networkCard, ipCard;
+    CardView javaCard, dbCard, sadCard, cppCard, networkCard, ipCard, mcCard, eCard, cmCard, fhiCard;
     EditText searchBar;
 
     @Override
@@ -27,8 +27,28 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // ================= Toolbar =================
-        MaterialToolbar toolbar = findViewById(R.id.toolbar);
+        MaterialToolbar toolbar =
+                findViewById(R.id.toolbar);
+
         setSupportActionBar(toolbar);
+
+        // Make menu icon white
+
+        toolbar.post(() -> {
+
+            if (toolbar.getOverflowIcon() != null) {
+
+                toolbar.getOverflowIcon().setTint(
+
+                        getResources().getColor(
+                                android.R.color.white
+                        )
+
+                );
+
+            }
+
+        });
 
         // 🎬 Animation
         toolbar.startAnimation(
@@ -45,6 +65,10 @@ public class MainActivity extends AppCompatActivity {
         cppCard = findViewById(R.id.cppCard);
         networkCard = findViewById(R.id.networkCard);
         ipCard = findViewById(R.id.ipCard);
+        mcCard = findViewById(R.id.mcCard);
+        eCard = findViewById(R.id.eCard);
+        cmCard = findViewById(R.id.cmCard);
+        fhiCard = findViewById(R.id.fhiCard);
 
         // ================= Search Bar =================
         searchBar = findViewById(R.id.searchBar);
@@ -69,6 +93,11 @@ public class MainActivity extends AppCompatActivity {
         cppCard.setOnClickListener(v -> open("cpp"));
         networkCard.setOnClickListener(v -> open("network"));
         ipCard.setOnClickListener(v -> open("ip"));
+        mcCard.setOnClickListener(v -> open("M-Computing"));
+        eCard.setOnClickListener(v -> open("E-Health"));
+        cmCard.setOnClickListener(v -> open("C-Maintenance"));
+        fhiCard.setOnClickListener(v -> open("Fundamental of HI"));
+
     }
 
     // ================= OPEN ACTIVITY =================
@@ -105,6 +134,19 @@ public class MainActivity extends AppCompatActivity {
 
         ipCard.setVisibility(
                 "ip".contains(query) ? CardView.VISIBLE : CardView.GONE
+        );
+
+        mcCard.setVisibility(
+                "M-Computing".contains(query) ? CardView.VISIBLE : CardView.GONE
+        );
+        eCard.setVisibility(
+                "E-Health".contains(query) ? CardView.VISIBLE : CardView.GONE
+        );
+        cmCard.setVisibility(
+                "C-Maintenance".contains(query) ? CardView.VISIBLE : CardView.GONE
+        );
+        fhiCard.setVisibility(
+                "Fundamental of HI".contains(query) ? CardView.VISIBLE : CardView.GONE
         );
     }
 

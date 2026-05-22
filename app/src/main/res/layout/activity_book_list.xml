@@ -12,20 +12,20 @@
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
+        android:layout_height="37dp"
         android:background="#0D47A1"
+        app:menu="@menu/main_menu"
+        app:navigationIcon="@drawable/ic_back"
         app:title="Java Chapters"
         app:titleCentered="true"
-        app:titleTextColor="@android:color/white"
-        app:navigationIcon="@drawable/ic_back"
-        app:menu="@menu/top_menu"/>
+        app:titleTextColor="@android:color/white" />
 
     <!-- ================= Search ================= -->
 
     <SearchView
         android:id="@+id/searchView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="36dp"
         android:queryHint="Search chapters..." />
 
     <!-- ================= ListView ================= -->

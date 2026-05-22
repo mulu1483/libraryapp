@@ -1,9 +1,34 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.Libraryapp" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+
+    <!-- Base application theme -->
+
+    <style name="Base.Theme.Libraryapp"
+        parent="Theme.Material3.DayNight.NoActionBar">
+
+        <!-- Customize theme here -->
+
     </style>
 
-    <style name="Theme.Libraryapp" parent="Base.Theme.Libraryapp" />
+    <style name="Theme.Libraryapp"
+        parent="Base.Theme.Libraryapp" />
+
+
+    <!-- Toolbar Menu White Color -->
+
+    <style name="ToolbarWhiteMenu">
+
+        <item name="actionOverflowButtonStyle">
+            @style/WhiteOverflow
+        </item>
+
+    </style>
+
+    <style name="WhiteOverflow">
+
+        <item name="android:tint">
+            #FFFFFF
+        </item>
+
+    </style>
+
 </resources>
