@@ -1,5 +1,4 @@
 package com.example.libraryapp;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -9,7 +8,7 @@ import android.view.MenuItem;
 import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.Toast;
-
+import android.view.MotionEvent;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
@@ -39,11 +38,10 @@ public class MainActivity extends AppCompatActivity {
             if (toolbar.getOverflowIcon() != null) {
 
                 toolbar.getOverflowIcon().setTint(
-
-                        getResources().getColor(
+                        androidx.core.content.ContextCompat.getColor(
+                                this,
                                 android.R.color.white
                         )
-
                 );
 
             }
@@ -71,19 +69,71 @@ public class MainActivity extends AppCompatActivity {
         fhiCard = findViewById(R.id.fhiCard);
 
         // ================= Search Bar =================
+
         searchBar = findViewById(R.id.searchBar);
 
+// Professional clear button behavior
+
         searchBar.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                filterCards(s.toString());
+            public void beforeTextChanged(
+                    CharSequence s,
+                    int start,
+                    int count,
+                    int after) {
+
             }
 
             @Override
-            public void afterTextChanged(Editable s) {}
+            public void onTextChanged(
+                    CharSequence s,
+                    int start,
+                    int before,
+                    int count) {
+
+                filterCards(s.toString());
+
+                updateSearchIcon();
+
+            }
+
+            @Override
+            public void afterTextChanged(
+                    Editable s) {
+
+            }
+
+        });
+
+        searchBar.setOnTouchListener((v,event)->{
+
+            if(event.getAction() == MotionEvent.ACTION_UP){
+
+                if(searchBar.getCompoundDrawables()[2] != null){
+
+                    int clearButtonStart = searchBar.getWidth()
+
+                                    - searchBar.getPaddingEnd()
+
+                                    - searchBar
+                                            .getCompoundDrawables()[2]
+                                            .getIntrinsicWidth();
+
+                    if(event.getX() >= clearButtonStart){
+
+                        searchBar.setText("");
+
+                        return true;
+
+                    }
+
+                }
+
+            }
+
+            return false;
+
         });
 
         // ================= Click Events =================
@@ -149,6 +199,34 @@ public class MainActivity extends AppCompatActivity {
                 "Fundamental of HI".contains(query) ? CardView.VISIBLE : CardView.GONE
         );
     }
+    private void updateSearchIcon(){
+
+        if(searchBar.getText()
+                .toString()
+                .isEmpty()){
+
+            searchBar
+                    .setCompoundDrawablesWithIntrinsicBounds(
+
+                            android.R.drawable.ic_menu_search,
+
+                            0, 0, 0
+                    );
+        }
+        else{
+            searchBar
+                    .setCompoundDrawablesWithIntrinsicBounds(
+
+                            android.R.drawable.ic_menu_search,
+
+                            0,
+
+                            android.R.drawable
+                                    .ic_menu_close_clear_cancel,
+                            0
+                    );
+        }
+    }
 
     // ================= MENU =================
     @Override
@@ -158,7 +236,6 @@ public class MainActivity extends AppCompatActivity {
         menu.add(0, 3, 2, "Exit");
         return true;
     }
-
     // ================= MENU ACTIONS =================
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

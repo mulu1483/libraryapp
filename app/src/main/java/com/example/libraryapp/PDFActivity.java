@@ -31,29 +31,17 @@ public class PDFActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_pdfactivity);
-        // ================= Toolbar =================
-        MaterialToolbar toolbar =
-                findViewById(R.id.toolbar);
+
+        // Toolbar
+        toolbar = findViewById(R.id.toolbar);
 
         setSupportActionBar(toolbar);
 
-        // Make menu icon white
+        if (getSupportActionBar() != null) {
 
-        toolbar.post(() -> {
-
-            if (toolbar.getOverflowIcon() != null) {
-
-                toolbar.getOverflowIcon().setTint(
-
-                        getResources().getColor(
-                                android.R.color.white
-                        )
-
-                );
-
-            }
-
-        });
+            getSupportActionBar()
+                    .setDisplayShowTitleEnabled(false);
+        }
 
         pdfView = findViewById(R.id.pdfView);
         pageNumber = findViewById(R.id.pageNumber);
@@ -313,7 +301,6 @@ public class PDFActivity extends AppCompatActivity {
 
                 toolbar.setTitle(
                         " ");
-
             }
 
         }

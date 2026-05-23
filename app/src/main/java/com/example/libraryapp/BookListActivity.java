@@ -1,10 +1,11 @@
 package com.example.libraryapp;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -30,29 +31,9 @@ public class BookListActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_book_list);
 
-        // ================= Toolbar =================
-        MaterialToolbar toolbar =
-                findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
 
         setSupportActionBar(toolbar);
-
-        // Make menu icon white
-
-        toolbar.post(() -> {
-
-            if (toolbar.getOverflowIcon() != null) {
-
-                toolbar.getOverflowIcon().setTint(
-
-                        getResources().getColor(
-                                android.R.color.white
-                        )
-
-                );
-
-            }
-
-        });
         // ================= Initialize =================
 
         listView = findViewById(R.id.listView);
@@ -381,68 +362,5 @@ public class BookListActivity extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(v -> finish());
         // ================= MENU CLICK =================
 
-        toolbar.setOnMenuItemClickListener(item -> {
-
-            // ===== ABOUT =====
-
-            if (item.getItemId() == R.id.about) {
-
-                androidx.appcompat.app.AlertDialog.Builder builder =
-                        new androidx.appcompat.app.AlertDialog.Builder(this);
-
-                builder.setTitle("About App");
-
-                builder.setMessage("PDF Application\n\n" +
-                                "Version : 1.0\n\n" +
-                                "This application helps students " +
-                                "to read PDF books and lecture notes.\n\n" +
-                                "Features:\n" +
-                                "• PDF Viewer\n" +
-                                "• Search Chapters\n" +
-                                "• Multiple Courses\n" +
-                                "• Easy Navigation\n\n" +
-                                "Developed By: " +
-                                "Muluken.A\n" + "Email: muluken851@gmail.com"
-                );
-
-                builder.setPositiveButton(
-                        "OK",
-                        (dialog, which) -> dialog.dismiss()
-                );
-
-                builder.show();
-            }
-
-            // ===== SHARE =====
-
-            else if (item.getItemId() == R.id.share) {
-
-                Intent shareIntent =
-                        new Intent(Intent.ACTION_SEND);
-
-                shareIntent.setType("text/plain");
-
-                shareIntent.putExtra(
-                        Intent.EXTRA_TEXT,
-                        "\"Download our PdApp from Play store\""
-                );
-
-                startActivity(
-                        Intent.createChooser(
-                                shareIntent,
-                                "Share Using"
-                        )
-                );
-            }
-
-            // ===== EXIT =====
-
-            else if (item.getItemId() == R.id.exit) {
-
-                finishAffinity();
-            }
-
-            return true;
-        });
     }
 }

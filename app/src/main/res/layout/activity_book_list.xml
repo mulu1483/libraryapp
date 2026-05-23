@@ -14,7 +14,6 @@
         android:layout_width="match_parent"
         android:layout_height="37dp"
         android:background="#0D47A1"
-        app:menu="@menu/main_menu"
         app:navigationIcon="@drawable/ic_back"
         app:title="Java Chapters"
         app:titleCentered="true"
